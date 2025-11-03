@@ -1,0 +1,117 @@
+Program no-03
+Experiment name:Implementation of stack
+
+AIM:
+To implement a program for Stack operations (Push and Pop) using an array in C.
+
+ALOGORITHM:
+1.Start the program.
+2.Declare variables: MAX, item, top = -1, choice = 0.
+3.Ask the user to enter the size of the stack (MAX).
+4.Create an integer array STACK[MAX].
+5.Repeat the following steps until the user chooses Exit (choice = 3):
+6.Display the menu:
+Push
+Pop
+Exit
+7.Read the user’s choice.
+If choice = 1 (Push):
+   Check if top == MAX - 1.
+     If true, display “Stack Overflow”.
+     Else, read the element to push, increment top and insert the element in STACK[top].
+If choice = 2 (Pop):
+ Check if top == -1.
+ If true, display “Stack Underflow”.
+ Else, display the popped element, then decrement top.
+If choice = 3 (Exit):
+  Terminate the program.
+Otherwise:
+ Display “Incorrect choice”.
+6.Stop the program.
+
+PROGRAM:
+#include <stdio.h>
+int main()
+{
+    int MAX, item;
+    int top = -1;
+    int choice = 0;
+
+    printf("Enter the stack: ");
+    scanf("%d", &MAX);
+    int STACK[MAX];
+
+    while (choice != 3)
+    {
+        printf("\n1. Push\n2. Pop\n3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            if (top == MAX - 1)
+            {
+                printf("Stack overflow\n");
+            }
+            else
+            {
+                printf("Enter the value to push: ");
+                scanf("%d", &item);
+                top = top + 1;
+                STACK[top] = item;
+            }
+            break;
+
+        case 2:
+            if (top == -1)
+            {
+                printf("Stack is underflow\n");
+            }
+            else
+            {
+                item = STACK[top];
+                top = top - 1;
+                printf("Popped element is: %d\n", item);
+            }
+            break;
+
+        case 3:
+            return 0;
+
+        default:
+            printf("Incorrect choice\n");
+            break;
+        }
+    }
+}
+
+OUTPUT:
+Enter the stack: 3
+
+1. Push
+2. Pop
+3. Exit
+Enter your choice: 1
+Enter the value to push: 53
+
+1. Push
+2. Pop
+3. Exit
+Enter your choice: 1
+Enter the value to push: 45
+
+1. Push
+2. Pop
+3. Exit
+Enter your choice: 2
+Popped element is: 45
+
+1. Push
+2. Pop
+3. Exit
+Enter your choice: 3
+
+Result:
+The program for implementation of Stack using array was successfully executed.
+It performs Push and Pop operations correctly based on user choice. 
