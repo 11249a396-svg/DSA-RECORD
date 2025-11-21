@@ -31,59 +31,61 @@ Otherwise:
 
 PROGRAM:
 #include <stdio.h>
-int main()
-{
+
+int main() {
     int MAX, item;
     int top = -1;
     int choice = 0;
 
-    printf("Enter the stack: ");
+    // Input the maximum size of stack
+    printf("Enter the size of the stack: ");
     scanf("%d", &MAX);
+
     int STACK[MAX];
 
-    while (choice != 3)
-    {
+    while (choice != 3) {
+        // Display menu
         printf("\n1. Push\n2. Pop\n3. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
-        switch (choice)
-        {
-        case 1:
-            if (top == MAX - 1)
-            {
-                printf("Stack overflow\n");
-            }
-            else
-            {
-                printf("Enter the value to push: ");
-                scanf("%d", &item);
-                top = top + 1;
-                STACK[top] = item;
-            }
-            break;
+        switch (choice) {
+            case 1:
+                // Push operation
+                if (top == MAX - 1) {
+                    printf("Stack overflow\n");
+                } else {
+                    printf("Enter the value to push: ");
+                    scanf("%d", &item);
+                    top = top + 1;
+                    STACK[top] = item;
+                    printf("%d pushed into stack\n", item);
+                }
+                break;
 
-        case 2:
-            if (top == -1)
-            {
-                printf("Stack is underflow\n");
-            }
-            else
-            {
-                item = STACK[top];
-                top = top - 1;
-                printf("Popped element is: %d\n", item);
-            }
-            break;
+            case 2:
+                // Pop operation
+                if (top == -1) {
+                    printf("Stack underflow\n");
+                } else {
+                    item = STACK[top];
+                    top = top - 1;
+                    printf("Popped element is: %d\n", item);
+                }
+                break;
 
-        case 3:
-            return 0;
+            case 3:
+                // Exit program
+                printf("Exiting...\n");
+                return 0;
 
-        default:
-            printf("Incorrect choice\n");
-            break;
+            default:
+                printf("Incorrect choice! Please enter 1, 2, or 3.\n");
+                break;
         }
     }
+
+    return 0;
 }
 
 OUTPUT:
