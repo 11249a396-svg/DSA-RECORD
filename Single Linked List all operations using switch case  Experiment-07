@@ -50,11 +50,13 @@ PROGRAM:
 #include <stdio.h>
 #include <stdlib.h>
 
+// Node structure
 struct Node {
     int data;
     struct Node *next;
 };
 
+// Function to create a new node
 struct Node* createNode(int value) {
     struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = value;
@@ -62,6 +64,7 @@ struct Node* createNode(int value) {
     return newNode;
 }
 
+// Insert node at the end
 void insertAtEnd(struct Node **head, int value) {
     struct Node *newNode = createNode(value);
 
@@ -69,6 +72,7 @@ void insertAtEnd(struct Node **head, int value) {
         *head = newNode;
         return;
     }
+
     struct Node *temp = *head;
     while (temp->next != NULL) {
         temp = temp->next;
@@ -76,6 +80,7 @@ void insertAtEnd(struct Node **head, int value) {
     temp->next = newNode;
 }
 
+// Display linked list
 void display(struct Node *head) {
     struct Node *temp = head;
     printf("Linked List: ");
@@ -86,22 +91,26 @@ void display(struct Node *head) {
     printf("NULL\n");
 }
 
+// Delete node at beginning
 void deleteAtBeginning(struct Node **head) {
     if (*head == NULL) {
         printf("List is empty. Nothing to delete.\n");
         return;
     }
+
     struct Node *temp = *head;
     *head = (*head)->next;
     free(temp);
     printf("Deleted node from beginning.\n");
 }
 
+// Delete node at end
 void deleteAtEnd(struct Node **head) {
     if (*head == NULL) {
         printf("List is empty. Nothing to delete.\n");
         return;
     }
+
     if ((*head)->next == NULL) {
         free(*head);
         *head = NULL;
@@ -113,11 +122,13 @@ void deleteAtEnd(struct Node **head) {
     while (temp->next->next != NULL) {
         temp = temp->next;
     }
+
     free(temp->next);
     temp->next = NULL;
     printf("Deleted node from end.\n");
 }
 
+// Delete node at a specific position
 void deleteAtPosition(struct Node **head, int position) {
     if (*head == NULL) {
         printf("List is empty. Nothing to delete.\n");
@@ -145,9 +156,11 @@ void deleteAtPosition(struct Node **head, int position) {
     printf("Deleted node at position %d.\n", position);
 }
 
+// Main function to test
 int main() {
     struct Node *head = NULL;
 
+    // Insert nodes
     insertAtEnd(&head, 10);
     insertAtEnd(&head, 20);
     insertAtEnd(&head, 30);
@@ -155,6 +168,7 @@ int main() {
 
     display(head);
 
+    // Delete operations
     deleteAtBeginning(&head);
     display(head);
 
