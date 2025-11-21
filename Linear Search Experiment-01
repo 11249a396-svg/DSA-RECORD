@@ -20,20 +20,27 @@ Otherwise, increase i by 1.
 
 PROGRAM:
 #include <stdio.h>
+
 int main() {
     int n, key, i, found = 0;
+
+    // Input size of array
     printf("Enter the size of the array: ");
     scanf("%d", &n);
 
     int A[n];
+
+    // Input array elements
     printf("Enter the %d elements: ", n);
     for(i = 0; i < n; i++) {
         scanf("%d", &A[i]);
     }
 
+    // Input the element to search
     printf("Enter the element to search: ");
     scanf("%d", &key);
 
+    // Linear search
     for(i = 0; i < n; i++) {
         if(A[i] == key) {
             printf("Element found at position %d\n", i+1);
@@ -42,12 +49,15 @@ int main() {
         }
     }
 
+    // If element not found
     if(!found) {
         printf("Element not found\n");
     }
 
     return 0;
 }
+
+
 OUTPUT:
 Enter the size of the array: 5  
 Enter 5 elements: 2 10 8 12 14  
