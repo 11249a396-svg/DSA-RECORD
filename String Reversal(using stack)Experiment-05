@@ -24,27 +24,30 @@ Reversal Effect: Since the last character of the original string was at the top 
 END the stringReversal() function.
 
 PROGRAM:
-#Include <stdio.h>
-#Include <stdlib.h>
-#Define MAX 100 
-Int Top = -1;
-Char STACK[MAX];
+#include <stdio.h>
+#include <stdlib.h>
 
-void push (char item) {
+#define MAX 100
+
+int Top = -1;
+char STACK[MAX];
+
+// Function to push an item onto the stack
+void push(char item) {
     if (Top == MAX - 1) {
-        printf ("Stack is overflow\n");
+        printf("Stack overflow\n");
     } else {
         Top = Top + 1;
         STACK[Top] = item;
     }
 }
 
+// Function to pop an item from the stack
 char pop() {
     char item;
     if (Top == -1) {
-        printf ("Stack is underflow/empty\n");
-        // Returning a null character or similar indicator for underflow
-        return '\0'; 
+        printf("Stack underflow/empty\n");
+        return '\0';  // Return null character if stack is empty
     } else {
         item = STACK[Top];
         Top = Top - 1;
@@ -52,24 +55,26 @@ char pop() {
     }
 }
 
+// Function to reverse a string using the stack
 void stringReversal() {
     char string[MAX];
     int size;
 
-    printf("Enter the size of string: ");
-    scanf("%d", &size); 
+    printf("Enter the size of the string: ");
+    scanf("%d", &size);
 
     printf("Please enter string to reverse: ");
-    scanf("%s", string); 
+    scanf("%s", string);
 
-    for (int C = 0; C < size && string[C] != '\0'; C++) { 
+    // Push each character of the string onto the stack
+    for (int C = 0; C < size && string[C] != '\0'; C++) {
         push(string[C]);
     }
 
     printf("Reversed string: ");
 
-    // Pop: Pop the characters from the stack and print them
-    for (int C = 0; C < size; C++) { 
+    // Pop characters from the stack to print them in reverse
+    for (int C = 0; C < size; C++) {
         printf("%c", pop());
     }
     printf("\n");
