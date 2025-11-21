@@ -23,34 +23,40 @@ PROGRAM:
 
 #define MAX 100
 
+// Stack definition
 char stack[MAX];
 int top = -1;
 
+// Check if stack is empty
 int isEmpty() {
     return top == -1;
 }
 
+// Push item onto stack
 void push(char item) {
     if (top >= MAX - 1) {
-        printf("stack overflow\n");
+        printf("Stack overflow\n");
         return;
     }
     stack[++top] = item;
 }
 
+// Pop item from stack
 char pop() {
     if (isEmpty()) {
-        printf("stack underflow\n");
+        printf("Stack underflow\n");
         return '\0';
     }
     return stack[top--];
 }
 
+// Peek top item of stack
 char peek() {
     if (isEmpty()) return '\0';
     return stack[top];
 }
 
+// Return precedence of operator
 int precedence(char item) {
     if (item == '^') return 3;
     else if (item == '*' || item == '/') return 2;
@@ -58,39 +64,42 @@ int precedence(char item) {
     else return 0;
 }
 
+// Main function
 int main() {
     char infix[MAX], postfix[MAX];
     int i, k = 0;
     char ch, temp;
 
     printf("Enter Infix expression: ");
-    scanf("%s", infix);
+    scanf("%s", infix); // Input infix expression
 
     for (i = 0; i < (int)strlen(infix); i++) {
         ch = infix[i];
 
-        if (isalnum(ch)) {              /* operand */
+        if (isalnum(ch)) {              // Operand → Add to postfix
             postfix[k++] = ch;
-        } else if (ch == '(') {
+        } else if (ch == '(') {         // Left parenthesis → Push
             push(ch);
-        } else if (ch == ')') {
+        } else if (ch == ')') {         // Right parenthesis → Pop until '('
             while (!isEmpty() && (temp = pop()) != '(') {
                 postfix[k++] = temp;
             }
-        } else {                        /* operator */
+        } else {                        // Operator
             while (!isEmpty() && precedence(peek()) >= precedence(ch)) {
-                postfix[k++] = pop();
+                postfix[k++] = pop();   // Pop higher/equal precedence
             }
-            push(ch);
+            push(ch);                   // Push current operator
         }
     }
 
+    // Pop remaining operators
     while (!isEmpty()) {
         postfix[k++] = pop();
     }
-    postfix[k] = '\0';
+    postfix[k] = '\0';                 // Null terminate
 
-    printf("postfix expression: %s\n", postfix);
+    printf("Postfix expression: %s\n", postfix);
+
     return 0;
 }
 
